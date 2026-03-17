@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="description"
+          content="ExploreVLA">
+    <meta name="keywords"
+          content="Autonomous Driving, Vision-Language Models, Traffi Scenario Generation">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ExploreVLA</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+
+
+    <link rel="stylesheet" href="./static/css/bulma.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="./static/css/index.css">
+    <link rel="icon" href="./static/images/logo.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script defer src="./static/js/fontawesome.all.min.js"></script>
+    <script src="./static/js/bulma-carousel.min.js"></script>
+    <script src="./static/js/bulma-slider.min.js"></script>
+    <script src="./static/js/index.js"></script>
+</head>
+
+<style>
+    #btt-bttn {
+        display: inline-block;
+        background-color: rgba(126, 125, 125, 0.5);
+        width: 50px;
+        height: 50px;
+        text-align: center;
+        border-radius: 4px;
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        transition: background-color .3s,
+        opacity .5s, visibility .5s;
+        opacity: 0;
+        visibility: hidden;
+        z-index: 1000;
+    }
+
+    #btt-bttn::after {
+        content: "\f077";
+        font-family: FontAwesome;
+        font-weight: normal;
+        font-style: normal;
+        font-size: 2em;
+        line-height: 50px;
+        color: #fff;
+    }
+
+    #btt-bttn:hover {
+        cursor: pointer;
+        background-color: #333;
+    }
+
+    #btt-bttn:active {
+        background-color: #555;
+    }
+
+    #btt-bttn.show {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .responsive-img {
+        width: 72%;
+        height: auto;
+    }
+
+    /* 针对屏幕宽度小于768px（一般是手机）时设置宽度为100% */
+    @media (max-width: 768px) {
+        .responsive-img {
+            width: 100%;
+        }
+    }
+</style>
+
+<body>
+<a id="btt-bttn"></a>
+
+
+<!--Title-->
+<section class="hero" style="margin-top: -30px;">
+    <div class="hero-body">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column has-text-centered">
+                    <h1 class="title is-2 publication-title"><img src="./static/images/logo.png" class="interpolation-image" alt="Interpolate start reference image." width="15%" draggable="false"/> ExploreVLA</h1>
+                    <h1 class="title is-3 publication-title">Dense World Modeling and Exploration for End-to-End Autonomous Driving</h1>
+                    <div class="is-size-5 publication-authors">
+                        <!-- Author List -->
+                        <span class="author-block">
+                          <a href="https://zihaosheng.github.io/">Zihao Sheng</a><sup>1,2&#9733</sup>,
+                        </span>
+                        <span class="author-block">
+                          <a href="https://scholar.google.com/citations?user=2A79H_UAAAAJ&hl=en">Xin Ye</a><sup>1,<i
+                                class="fa-regular fa-envelope"></i></sup>,
+                        </span>
+                        <span class="author-block">
+                          <a href="https://scholar.google.com/citations?user=vNwd2SoAAAAJ&hl=en">Jingru Luo</a><sup>1</sup>,
+                        </span>
+                        <span class="author-block">
+                          <a href="https://sky-lab-uw.github.io/">Sikai Chen</a><sup>2</sup>,
+                        </span>
+                        <span class="author-block">
+                          <a href="https://www.liu-ren.com/">Liu Ren</a><sup>1</sup>
+                        </span>
+                        <!-- Affiliations -->
+                        <div class="is-size-5 publication-authors">
+                            <span class="author-block"><sup>1</sup>Bosch Research North America & Bosch Center for Artificial Intelligence (BCAI)</span> <br>
+                            <span class="author-block"><sup>2</sup>University of Wisconsin-Madison</span>
+                        </div>
+                        <!-- Contribution Legend -->
+                        <div class="contribution-legend" style="margin-top: 5px; font-size: 16px;">
+                            <small><sup>&#9733;</sup>Work was done during internship at Bosch &nbsp;</small>
+                            <span class="eql-cntrb"><small><sup><i
+                                    class="fa-regular fa-envelope"></i></sup>Corresponding Author</small></span>
+                        </div>
+                    </div>
+                    <div class="column has-text-centered">
+                        <div class="publication-links">
+                <span class="link-block">
+                  <a href="https://arxiv.org/" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://github.com/zihaosheng/" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                    <a href="https://huggingface.co/zihaosheng" class="external-link button is-normal is-rounded is-dark">
+                    <span>🤗 HuggingFace</span>
+                  </a>
+                </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="hero teaser">
+    <div class="container is-max-desktop">
+        <div class="hero-body">
+            <div class="columns is-multiline">
+
+                <div class="column is-one-third">
+                    <video autoplay muted loop playsinline preload="metadata" style="width:100%">
+                        <source src="static/videos/teaser-1.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="column is-one-third">
+                    <video autoplay muted loop playsinline preload="metadata" style="width:100%">
+                        <source src="static/videos/teaser-2.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="column is-one-third">
+                    <video autoplay muted loop playsinline preload="metadata" style="width:100%">
+                        <source src="static/videos/teaser-3.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="column is-one-third">
+                    <video autoplay muted loop playsinline preload="metadata" style="width:100%">
+                        <source src="static/videos/teaser-4.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="column is-one-third">
+                    <video autoplay muted loop playsinline preload="metadata" style="width:100%">
+                        <source src="static/videos/teaser-5.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="column is-one-third">
+                    <video autoplay muted loop playsinline preload="metadata" style="width:100%">
+                        <source src="static/videos/teaser-6.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="column is-one-third">
+                    <video autoplay muted loop playsinline preload="metadata" style="width:100%">
+                        <source src="static/videos/teaser-7.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="column is-one-third">
+                    <video autoplay muted loop playsinline preload="metadata" style="width:100%">
+                        <source src="static/videos/teaser-8.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+                <div class="column is-one-third">
+                    <video autoplay muted loop playsinline preload="metadata" style="width:100%">
+                        <source src="static/videos/teaser-9.mp4" type="video/mp4">
+                    </video>
+                </div>
+
+            </div>
+            <h2 class="subtitle has-text-centered">
+                ExploreVLA uses leverages the <span style="color: rgb(176, 152, 31)">world model's prediction uncertainty</span> as an intrinsic reward to guide safe, novelty-aware exploration via GRPO, achieving SOTA on NAVSIM.
+            </h2>
+        </div>
+    </div>
+</section>
+
+
+<!-- Highlights Section -->
+<section class="hero is-light is-big", style="margin-top: 0px">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-five-fifths">
+                <br>
+                <h2 class="title is-3">🤩 Highlights</h2>
+            </div>
+        </div>
+
+        <div class="columns is-centered">
+            <div class="column is-five-fifths">
+                <img src="./static/images/fig1-nobg.svg"
+                     class="interpolation-image"
+                     alt="Interpolate start reference image."
+                     draggable="false"/>
+                <br>
+                <br>
+                <p style="font-size: 20px;">
+                    1. <b>World Model as Exploration Compass</b>: We repurpose the world model's image prediction uncertainty as an <span style="color: rgb(176, 152, 31)">intrinsic exploration signal</span>, naturally measuring trajectory novelty relative to the training distribution.
+                </p>
+                <br>
+                <p style="font-size: 20px;">
+                    2. <b>Safety-Gated Exploration</b>: A PDMS-gated reward ensures only <span style="color: rgb(176, 152, 31)">safe out-of-distribution trajectories</span> receive exploration bonuses, enabling the policy to expand its behavioral repertoire without compromising driving safety.
+                </p>
+                <br>
+                <p style="font-size: 20px;">
+                    3. <b>SOTA Performance</b>: ExploreVLA achieves <span style="color: rgb(176, 152, 31)">93.7 PDMS and 88.8 EPDMS</span> on NAVSIM using only a single front-view camera, outperforming multi-sensor methods.
+                </p>
+                <br><br>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <!-- Animation. -->
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-full-width">
+                <h2 class="title is-3"><img src="./static/images/logo.png" draggable="false" class="interpolation-image" alt="Interpolate start reference image." width="15%"/>  ExploreVLA Architecture</h2>
+            </div>
+        </div>
+        <div class="columns is-centered ">
+            <div class="column is-full-width">
+                <div class="column is-centered has-text-centered">
+                    <img src="./static/images/fig2.svg"
+                         class="interpolation-image"
+                         alt="Interpolate start reference image."
+                         draggable="false"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered">NAVSIM Planning Demos</h2>
+
+        <div class="columns is-multiline">
+            <div class="column is-full">
+                <video autoplay muted loop playsinline preload="metadata">
+                    <source src="static/videos/clip-01.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="column is-full">
+                <video autoplay muted loop playsinline preload="metadata">
+                    <source src="static/videos/clip-02.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="column is-full">
+                <video autoplay muted loop playsinline preload="metadata">
+                    <source src="static/videos/clip-03.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="column is-full">
+                <video autoplay muted loop playsinline preload="metadata">
+                    <source src="static/videos/clip-04.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="column is-full">
+                <video autoplay muted loop playsinline preload="metadata">
+                    <source src="static/videos/clip-05.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="column is-full">
+                <video autoplay muted loop playsinline preload="metadata">
+                    <source src="static/videos/clip-06.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="column is-full">
+                <video autoplay muted loop playsinline preload="metadata">
+                    <source src="static/videos/clip-07.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="column is-full">
+                <video autoplay muted loop playsinline preload="metadata">
+                    <source src="static/videos/clip-08.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered">Performance Results</h2>
+        <div class="columns is-centered">
+            <div class="column is-centered has-text-centered">
+                <p style="font-size: 20px; text-align: left;">
+                    <strong>Table 1: Quantitative comparison on
+                    <span style="color:#a58b0d;"><b>NAVSIM v1</b></span></strong>.
+                    The best performance is marked in <b>bold</b>, and the second best is <u>underlined</u>.
+                </p>
+                <img src="./static/images/table1.png"
+                     class="interpolation-image"
+                     alt="Table 1"
+                     style="width:100%; height:auto;"
+                     draggable="false"/>
+            </div>
+        </div>
+
+        <div class="columns is-centered">
+            <div class="column is-centered has-text-centered">
+                <p style="font-size: 20px; text-align: left;">
+                    <strong>Table 2: Quantitative comparison on
+                        <span style="color:#a58b0d;"><b>NAVSIM v2</b></span></strong>.
+                    The best performance is marked in <b>bold</b>, and the second best is <u>underlined</u>.
+                </p>
+                <img src="./static/images/table2.png"
+                     class="interpolation-image"
+                     alt="Table 2"
+                     draggable="false"/>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!--BibTex citation -->
+<section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+        <h2 class="title">BibTeX</h2>
+        <div style="position: relative;">
+            <button id="copyButton" style="position: absolute; top: 0; right: 0;">Copy</button>
+            <pre><code id="bibtexCode">@article{sheng2026explorevla,
+  title={ExploreVLA: Dense World Modeling and Exploration for End-to-End Autonomous Driving},
+  author={Sheng, Zihao and Ye, Xin and Luo, Jingru and Chen, Sikai and Ren, Liu},
+  journal={arXiv},
+  year={2026}
+}</code></pre>
+        </div>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+<script>
+    var copyButton = document.getElementById("copyButton");
+
+    copyButton.addEventListener("click", function () {
+        var codeElement = document.getElementById("bibtexCode");
+        var textToCopy = codeElement.textContent;
+
+        var textarea = document.createElement("textarea");
+        textarea.value = textToCopy;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+
+        copyButton.textContent = "✓ Copied!";
+
+        setTimeout(function () {
+            copyButton.textContent = "Copy";
+        }, 2000); // Reset the button text after 2 seconds (adjust as needed)
+    });
+</script>
+
+
+<footer class="footer">
+    <div class="container">
+        <div class="content has-text-centered">
+            <a class="icon-link" href="https://arxiv.org/">
+                <i class="fas fa-file-pdf"></i>
+            </a>
+            <a class="icon-link" href="https://github.com/zihaosheng/" class="external-link"
+               disabled>
+                <i class="fab fa-github"></i>
+            </a>
+        </div>
+        <div class="columns is-centered">
+            <div class="column is-8">
+                <div class="content">
+                    <p class="footer-paragraph">
+                        This page is adapted from the <a href="https://github.com/nerfies/nerfies.github.io">Nerfies
+                        project
+                        page</a> and is licensed under a <a href="https://creativecommons.org/licenses/by-sa/4.0/">Creative
+                        Commons Attribution-ShareAlike 4.0 International License</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+
+<script>
+    var btn = $('#btt-bttn');
+
+    $(window).scroll(function () {
+        if ($(window).scrollTop() > 300) {
+            btn.addClass('show');
+        } else {
+            btn.removeClass('show');
+        }
+    });
+
+    btn.on('click', function (e) {
+        e.preventDefault();
+        $('html, body').animate({scrollTop: 0}, '300');
+    });
+
+</script>
+
+</html>
