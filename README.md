@@ -1,7 +1,8 @@
 # ExploreVLA: Dense World Modeling and Exploration for End-to-End Autonomous Driving
 
-🚧 **Code Release Coming Soon**
-We are currently organizing and cleaning up the codebase for public release. The full implementation will be open-sourced soon. Please stay tuned!
+🎉 **Accepted at ECCV 2026 — Code Release Coming Soon!**
+ExploreVLA has been accepted at ECCV 2026. We are currently organizing and cleaning up the codebase, and the full implementation will be open-sourced here very soon. 
+Please star ⭐ and stay tuned!
 
 ## ✨ Key Idea
 
