@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Environments
+.venv/
+venv/
+.env
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs / experiment outputs
+wandb/
+outputs/
+*.log
+
+# Checkpoints / large binaries
+*.pth
+*.ckpt
+*.safetensors
