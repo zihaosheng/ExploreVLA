@@ -32,10 +32,10 @@ Please star ⭐ and stay tuned!
 ## 📚 Citation
 
 ```bibtex
-@article{sheng2026explorevla,
+@inproceedings{sheng2026explorevla,
   title={ExploreVLA: Dense World Modeling and Exploration for End-to-End Autonomous Driving},
   author={Sheng, Zihao and Ye, Xin and Luo, Jingru and Chen, Sikai and Ren, Liu},
-  journal={arXiv preprint arXiv:2604.02714},
+  booktitle={European Conference on Computer Vision (ECCV)},
   year={2026}
 }
 ```
