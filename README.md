@@ -4,6 +4,12 @@
 ExploreVLA has been accepted at ECCV 2026. We are currently organizing and cleaning up the codebase, and the full implementation will be open-sourced here very soon. 
 Please star ⭐ and stay tuned!
 
+## 🚧 Release TODO
+
+- [x] Data preprocessing and configs
+- [ ] Model and training code
+- [ ] Pretrained checkpoints
+
 ## ✨ Key Idea
 
 *We use the world model's prediction uncertainty as an intrinsic reward to guide exploration toward novel yet safe trajectories.*
